@@ -47,11 +47,11 @@ public class AuthServiceImpl implements AuthService {
 
         RoleType roleType;
 
-        if ("JOB_GIVER".equalsIgnoreCase(request.getRole())) {
+        try {
 
-            roleType = RoleType.ROLE_JOB_GIVER;
+            roleType = RoleType.valueOf(request.getRole());
 
-        } else {
+        } catch (Exception e) {
 
             roleType = RoleType.ROLE_JOB_SEEKER;
         }
@@ -82,7 +82,6 @@ public class AuthServiceImpl implements AuthService {
                 .message("User Registered Successfully")
                 .build();
     }
-
     @Override
     public AuthResponse login(LoginRequest request) {
 
